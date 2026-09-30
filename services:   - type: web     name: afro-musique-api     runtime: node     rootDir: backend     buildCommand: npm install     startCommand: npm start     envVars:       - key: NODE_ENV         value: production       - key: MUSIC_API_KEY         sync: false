@@ -1,1 +1,12 @@
-
+services:
+  - type: web
+    name: afro-musique-api
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MUSIC_API_KEY
+        sync: false
