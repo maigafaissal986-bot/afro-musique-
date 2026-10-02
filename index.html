@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Afro Musique</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #090909, #1b1205);
+      color: white;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .logo {
+      text-align: center;
+      font-size: 34px;
+      font-weight: bold;
+      margin: 20px 0 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #d6a84f;
+      margin-bottom: 25px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 7px;
+      font-weight: bold;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      background: #fff;
+      color: #111;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 22px;
+      padding: 15px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(90deg, #d4a13a, #f3d27a);
+      color: #111;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    .status {
+      text-align: center;
+      margin-top: 20px;
+      padding: 12px;
+      border-radius: 10px;
+      background: rgba(0, 255, 150, 0.1);
+      color: #7dffb2;
+    }
+
+    .result {
+      display: none;
+      margin-top: 20px;
+      padding: 18px;
+      background: rgba(255, 255, 255, 0.06);
+      border-radius: 15px;
+    }
+
+    audio {
+      width: 100%;
+      margin-top: 12px;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 25px;
+      color: #aaa;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="logo">🎵 Afro Musique</div>
+
+    <div class="subtitle">
+      Création de musique africaine avec l'intelligence artificielle
+    </div>
+
+    <div class="card">
+
+      <label for="titre">Titre de la chanson</label>
+      <input
+        id="titre"
+        type="text"
+        placeholder="Ex : Ma belle Afrique"
+      >
+
+      <label for="artiste">Nom de l'artiste</label>
+      <input
+        id="artiste"
+        type="text"
+        placeholder="Ex : Faïssal"
+      >
+
+      <label for="style">Style musical</label>
+      <select id="style">
+        <option value="Afrobeat">Afrobeat</option>
+        <option value="Afropop">Afropop</option>
+        <option value="Coupé-décalé">Coupé-décalé</option>
+        <option value="Mandé">Mandé</option>
+        <option value="Rap africain">Rap africain</option>
+        <option value="Gospel">Gospel</option>
+      </select>
+
+      <label for="description">Description / paroles</label>
+      <textarea
+        id="description"
+        placeholder="Décris la chanson que tu souhaites créer..."
+      ></textarea>
+
+      <button onclick="genererMusique()">
+        🎶 Générer la musique
+      </button>
+
+      <div id="status" class="status">
+        🔄 Vérification de la connexion...
+      </div>
+
+      <div id="result" class="result">
+        <strong>🎧 Résultat</strong>
+        <p id="message"></p>
+        <audio id="audio" controls></audio>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      © 2026 Afro Musique
+    </div>
+
+  </div>
+
+  <script>
+
+    const API_URL =
+      "https://afro-musique-api.onrender.com";
+
+    // Vérification de l'API
+    fetch(API_URL + "/")
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById("status").innerText =
+          "🟢 API Afro Musique connectée";
+      })
+      .catch(error => {
+        document.getElementById("status").innerText =
+          "🔴 API non disponible";
+      });
+
+
+    // Génération
+    function genererMusique() {
+
+      const titre =
+        document.getElementById("titre").value;
+
+      const artiste =
+        document.getElementById("artiste").value;
+
+      const style =
+        document.getElementById("style").value;
+
+      const description =
+        document.getElementById("description").value;
+
+      if (!titre || !description) {
+        alert("Veuillez remplir le titre et la description.");
+        return;
+      }
+
+      const result =
+        document.getElementById("result");
+
+      const message =
+        document.getElementById("message");
+
+      result.style.display = "block";
+
+      message.innerText =
+        "🎵 Demande préparée : " +
+        titre +
+        " — " +
+        style +
+        " — " +
+        artiste;
+
+      alert(
+        "L'interface fonctionne ! La prochaine étape sera de connecter ce bouton au véritable moteur de génération musicale."
+      );
+    }
+
+  </script>
+
+</body>
+        </html>
