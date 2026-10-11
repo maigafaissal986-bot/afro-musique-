@@ -229,20 +229,26 @@
 
       result.style.display = "block";
 
-      message.innerText =
-        "🎵 Demande préparée : " +
-        titre +
-        " — " +
-        style +
-        " — " +
-        artiste;
-
-      alert(
-        "L'interface fonctionne ! La prochaine étape sera de connecter ce bouton au véritable moteur de génération musicale."
-      );
-    }
-
-  </script>
-
-</body>
-        </html>
+      fetch("https://afro-musique-api.onrender.com/génératrice", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        titre: titre,
+        artiste: artiste,
+        style: style,
+        description: description
+    })
+})
+.then(response => response.json())
+.then(data => {
+    message.innerText = "🎵 " + data.message;
+    resultat.style.display = "block";
+    alert("Demande envoyée à Afro-Musique !");
+})
+.catch(error => {
+    console.error(error);
+    alert("Erreur de connexion au serveur. Réessaie dans quelques secondes.");
+);
+}      
