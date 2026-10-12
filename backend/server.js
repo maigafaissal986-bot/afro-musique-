@@ -12,14 +12,13 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/santé", (req, res) => {
+app.get("/sante", (req, res) => {
   res.json({
-    statut: "d'accord"
+    statut: "ok"
   });
 });
 
-// Génération musicale
-app.post("/generer", async (req, res) => {
+app.post("/generatrice", async (req, res) => {
   try {
     const { titre, artiste, style, description } = req.body;
 
@@ -46,9 +45,8 @@ app.post("/generer", async (req, res) => {
         description
       }
     });
-
-  } catch (erreur) {
-    console.error(erreur);
+  } catch (error) {
+    console.error(error);
 
     res.status(500).json({
       succes: false,
