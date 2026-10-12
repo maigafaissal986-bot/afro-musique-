@@ -200,55 +200,53 @@
           "🔴 API non disponible";
       });
 
+async function genreMusique() {
+  const titre = document.getElementById("titre").value.trim();
+  const artiste = document.getElementById("artiste").value.trim();
+  const style = document.getElementById("style").value;
+  const description = document.getElementById("description").value.trim();
 
-    // Génération
-    function genererMusique() {
+  const result = document.getElementById("result");
+  const message = document.getElementById("message");
 
-      const titre =
-        document.getElementById("titre").value;
+  if (!titre || !description) {
+    alert("Veuillez remplir le titre et la description.");
+    return;
+  }
 
-      const artiste =
-        document.getElementById("artiste").value;
+  result.style.display = "block";
+  message.innerText = "⏳ Envoi de votre demande...";
 
-      const style =
-        document.getElementById("style").value;
-
-      const description =
-        document.getElementById("description").value;
-
-      if (!titre || !description) {
-        alert("Veuillez remplir le titre et la description.");
-        return;
+  try {
+    const response = await fetch(
+      "https://afro-musique-api.onrender.com/génératrice",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          titre,
+          artiste,
+          style,
+          description
+        })
       }
+    );
 
-      const result =
-        document.getElementById("result");
+    const data = await response.json();
 
-      const message =
-        document.getElementById("message");
+    if (!response.ok) {
+      throw new Error(data.erreur || "Erreur du serveur.");
+    }
 
-      result.style.display = "block";
+    message.innerText =
+      "🎵 " + (data.message || "Demande reçue par Afro Musique.");
 
-      fetch("https://afro-musique-api.onrender.com/génératrice", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-        titre: titre,
-        artiste: artiste,
-        style: style,
-        description: description
-    })
-})
-.then(response => response.json())
-.then(data => {
-    message.innerText = "🎵 " + data.message;
-    resultat.style.display = "block";
-    alert("Demande envoyée à Afro-Musique !");
-})
-.catch(error => {
+  } catch (error) {
     console.error(error);
-    alert("Erreur de connexion au serveur. Réessaie dans quelques secondes.");
-);
-}      
+    message.innerText =
+      "❌ Impossible d'envoyer la demande. Réessayez dans quelques secondes.";
+  }
+}
+    /
