@@ -189,16 +189,76 @@
       "https://afro-musique-api.onrender.com";
 
     // Vérification de l'API
-    fetch(API_URL + "/")
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById("status").innerText =
-          "🟢 API Afro Musique connectée";
+    <script>
+const API_URL = "https://afro-musique-api.onrender.com";
+
+// Vérifier la connexion à l'API
+async function verifierAPI() {
+  const status = document.getElementById("status");
+
+  try {
+    const response = await fetch(API_URL + "/");
+    if (!response.ok) {
+      throw new Error("Serveur indisponible");
+    }
+
+    status.innerText = "🟢 API Afro Musique connectée";
+  } catch (error) {
+    status.innerText =
+      "🔴 API indisponible. Réessayez dans quelques secondes.";
+  }
+}
+
+// Générer la demande musicale
+async function genererMusique() {
+  const titre = document.getElementById("titre").value.trim();
+  const artiste = document.getElementById("artiste").value.trim();
+  const style = document.getElementById("style").value;
+  const description = document.getElementById("description").value.trim();
+
+  const result = document.getElementById("result");
+  const message = document.getElementById("message");
+
+  if (!titre || !description) {
+    alert("Veuillez remplir le titre et la description.");
+    return;
+  }
+
+  result.style.display = "block";
+  message.innerText = "⏳ Envoi de votre demande...";
+
+  try {
+    const response = await fetch(API_URL + "/génératrice", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        titre: titre,
+        artiste: artiste,
+        style: style,
+        description: description
       })
-      .catch(error => {
-        document.getElementById("status").innerText =
-          "🔴 API non disponible";
-      });
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.erreur || "Erreur du serveur.");
+    }
+
+    message.innerText =
+      "🎵 " + (data.message || "Demande reçue par Afro Musique.");
+  } catch (error) {
+    console.error(error);
+    message.innerText =
+      "❌ Impossible d'envoyer la demande. Vérifiez la connexion au serveur.";
+  }
+}
+
+// Vérifier l'API au chargement de la page
+verifierAPI();
+</script>
 
 async function genreMusique() {
   const titre = document.getElementById("titre").value.trim();
