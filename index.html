@@ -2,331 +2,196 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Afro Musique - Création musicale IA</title>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Afro Musique</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
+    * { box-sizing: border-box; }
     body {
       margin: 0;
-      padding: 20px 12px;
+      padding: 20px;
       background: #100c06;
       color: white;
       font-family: Arial, sans-serif;
     }
-
-    .container {
-      width: 100%;
+    h1 { text-align: center; color: #f4cf69; }
+    .subtitle {
+      text-align: center;
+      color: #f4cf69;
+      margin-bottom: 30px;
+    }
+    .card {
       max-width: 650px;
       margin: auto;
+      padding: 25px;
+      border: 1px solid #51452c;
+      border-radius: 25px;
+      background: #211d17;
     }
-
-    header {
-      text-align: center;
-      margin: 20px 0 35px;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 38px;
-      font-weight: bold;
-    }
-
-    .subtitle {
-      color: #e9bd55;
-      font-size: 20px;
-      line-height: 1.5;
-      margin-top: 15px;
-    }
-
-    .card {
-      background: linear-gradient(145deg, #29241d, #1b1711);
-      border: 1px solid #494035;
-      border-radius: 28px;
-      padding: 28px;
-      box-shadow: 0 8px 30px #0005;
-    }
-
     label {
       display: block;
-      font-size: 19px;
       font-weight: bold;
-      margin: 20px 0 12px;
+      margin: 20px 0 10px;
     }
-
-    input,
-    select,
-    textarea {
+    input, select, textarea {
       width: 100%;
-      padding: 17px;
-      border: none;
-      border-radius: 17px;
+      padding: 16px;
+      border: 0;
+      border-radius: 15px;
       background: white;
-      color: #171717;
-      font-size: 18px;
-      font-family: Arial, sans-serif;
+      color: #111;
+      font-size: 17px;
     }
-
-    textarea {
-      min-height: 180px;
-      resize: vertical;
-      line-height: 1.5;
-    }
-
+    textarea { min-height: 150px; resize: vertical; }
     button {
       width: 100%;
+      padding: 20px;
       margin-top: 25px;
-      padding: 20px 12px;
-      border: none;
-      border-radius: 17px;
-      background: linear-gradient(100deg, #dca52e, #ffdf80);
-      color: #17120a;
-      font-size: 20px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    button:disabled {
-      opacity: 0.65;
-      cursor: wait;
-    }
-
-    .status,
-    .result {
-      margin-top: 22px;
-      padding: 17px;
+      border: 0;
       border-radius: 15px;
-      background: #203b27;
-      color: #8af0a6;
+      background: linear-gradient(90deg, #d9a52e, #ffe080);
+      color: #171006;
+      font-size: 19px;
+      font-weight: bold;
+    }
+    #status {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 12px;
       overflow-wrap: anywhere;
-      line-height: 1.6;
     }
-
-    .result {
+    #result {
       display: none;
-      background: #242018;
-      color: white;
-      border: 1px solid #66532b;
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid #776333;
+      border-radius: 15px;
+      overflow-wrap: anywhere;
     }
-
-    .result h2 {
-      color: #f2cd6c;
-      font-size: 21px;
-    }
-
-    .footer {
+    footer {
       text-align: center;
       color: #aaa;
-      margin: 28px 0 10px;
-    }
-
-    @media (max-width: 500px) {
-      h1 {
-        font-size: 30px;
-      }
-
-      .card {
-        padding: 20px;
-      }
-
-      .subtitle {
-        font-size: 18px;
-      }
+      margin-top: 30px;
     }
   </style>
 </head>
-
 <body>
-  <main class="container">
+  <h1>🎵 Afro Musique</h1>
+  <p class="subtitle">Création de musique africaine avec l'intelligence artificielle</p>
 
-    <header>
-      <h1>🎵 Afro Musique</h1>
+  <main class="card">
+    <form id="musicForm">
+      <label for="titre">Titre de la chanson</label>
+      <input id="titre" required value="La paix">
 
-      <div class="subtitle">
-        Création de musique africaine<br>
-        avec l'intelligence artificielle
-      </div>
-    </header>
+      <label for="artiste">Nom de l'artiste</label>
+      <input id="artiste" value="Iba One">
 
-    <section class="card">
+      <label for="style">Style musical</label>
+      <select id="style">
+        <option>Afrobeat</option>
+        <option>Afropop</option>
+        <option>Rap malien</option>
+        <option>Mandingo</option>
+        <option>Gospel</option>
+        <option>Reggae</option>
+      </select>
 
-      <form id="musicForm">
+      <label for="description">Description / paroles</label>
+      <textarea id="description" required
+        placeholder="Décris la chanson que tu souhaites créer..."></textarea>
 
-        <label for="titre">Titre de la chanson</label>
-        <input
-          id="titre"
-          name="titre"
-          type="text"
-          placeholder="Exemple : La paix"
-          required
-        >
+      <button id="submitBtn" type="submit">🎶 Envoyer la demande</button>
+    </form>
 
-        <label for="artiste">Nom de l'artiste</label>
-        <input
-          id="artiste"
-          name="artiste"
-          type="text"
-          placeholder="Nom de l'artiste"
-        >
-
-        <label for="style">Style musical</label>
-        <select id="style" name="style">
-          <option value="Afrobeat">Afrobeat</option>
-          <option value="Afropop">Afropop</option>
-          <option value="Mandingue">Mandingue</option>
-          <option value="Rap africain">Rap africain</option>
-          <option value="Afro-fusion">Afro-fusion</option>
-          <option value="Gospel africain">Gospel africain</option>
-          <option value="Reggae">Reggae</option>
-          <option value="Traditionnel malien">Traditionnel malien</option>
-        </select>
-
-        <label for="description">Description / paroles</label>
-        <textarea
-          id="description"
-          name="description"
-          placeholder="Décris la chanson que tu souhaites créer..."
-          required
-        ></textarea>
-
-        <button id="generateButton" type="submit">
-          🎶 Générer la musique
-        </button>
-
-      </form>
-
-      <div id="status" class="status" role="status">
-        🔄 Vérification de la connexion...
-      </div>
-
-      <section id="result" class="result">
-        <h2>🎵 Résultat de ta demande</h2>
-        <p id="message"></p>
-        <p id="details"></p>
-      </section>
-
+    <div id="status">🔄 Vérification de la connexion...</div>
+    <section id="result">
+      <h2>🎵 Résultat de ta demande</h2>
+      <pre id="resultText" style="white-space:pre-wrap"></pre>
     </section>
-
-    <div class="footer">
-      © 2026 Afro Musique
-    </div>
-
   </main>
+
+  <footer>© 2026 Afro Musique</footer>
 
   <script>
     const API_URL = "https://afro-musique-api.onrender.com";
 
-    const statusBox = document.getElementById("status");
-    const form = document.getElementById("musicForm");
-    const button = document.getElementById("generateButton");
-    const resultBox = document.getElementById("result");
-    const messageBox = document.getElementById("message");
-    const detailsBox = document.getElementById("details");
-
-    async function verifierConnexion() {
-      statusBox.textContent = "🔄 Connexion au serveur en cours...";
-
+    async function checkAPI() {
+      const status = document.getElementById("status");
       try {
-        const response = await fetch(API_URL + "/", {
-          method: "GET"
-        });
-
-        if (!response.ok) {
-          throw new Error("Le serveur a répondu avec une erreur.");
-        }
-
+        const response = await fetch(API_URL + "/");
         const data = await response.json();
 
-        statusBox.textContent =
-          "🟢 Serveur connecté : " +
-          (data.message || "Afro Musique est disponible.");
+        if (!response.ok) throw new Error("HTTP " + response.status);
 
+        status.textContent = "🟢 API connectée : " + data.message;
       } catch (error) {
-        console.error("Erreur de connexion :", error);
-
-        statusBox.textContent =
-          "🔴 Connexion impossible. Réessaie dans quelques secondes.";
+        status.textContent =
+          "🔴 API inaccessible. Vérifie le serveur Render.";
+        console.error(error);
       }
     }
 
-    form.addEventListener("submit", async function(event) {
-      event.preventDefault();
+    document.getElementById("musicForm").addEventListener("submit",
+      async function(event) {
+        event.preventDefault();
 
-      const titre = document.getElementById("titre").value.trim();
-      const artiste = document.getElementById("artiste").value.trim();
-      const style = document.getElementById("style").value;
-      const description =
-        document.getElementById("description").value.trim();
+        const status = document.getElementById("status");
+        const result = document.getElementById("result");
+        const resultText = document.getElementById("resultText");
+        const button = document.getElementById("submitBtn");
 
-      if (!titre || !description) {
-        alert("Veuillez remplir le titre et la description.");
-        return;
-      }
+        const payload = {
+          titre: document.getElementById("titre").value.trim(),
+          artiste: document.getElementById("artiste").value.trim(),
+          style: document.getElementById("style").value,
+          description: document.getElementById("description").value.trim()
+        };
 
-      button.disabled = true;
-      button.textContent = "⏳ Envoi de la demande...";
-      resultBox.style.display = "block";
-      messageBox.textContent = "Connexion au serveur...";
-      detailsBox.textContent = "";
-
-      try {
-        const response = await fetch(
-          API_URL + "/g%C3%A9n%C3%A9ratrice",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              titre: titre,
-              artiste: artiste,
-              style: style,
-              description: description
-            })
-          }
-        );
-
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error(
-            data.erreur || data.error || "Le serveur a refusé la demande."
-          );
+        if (!payload.titre || !payload.description) {
+          status.textContent = "⚠️ Remplis le titre et la description.";
+          return;
         }
 
-        messageBox.textContent =
-          "✅ " + (data.message || "Ta demande a été reçue.");
+        button.disabled = true;
+        status.textContent = "⏳ Envoi de ta demande...";
+        result.style.display = "none";
 
-        detailsBox.textContent =
-          "Titre : " + titre +
-          " | Artiste : " + (artiste || "Non précisé") +
-          " | Style : " + style +
-          ". La demande a été envoyée au serveur. " +
-          "Aucun fichier audio n'est encore généré par cette version.";
+        try {
+          const response = await fetch(API_URL + "/génératrice", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
 
-        statusBox.textContent = "🟢 Demande envoyée au serveur.";
+          const text = await response.text();
+          let data;
 
-      } catch (error) {
-        console.error("Erreur lors de l'envoi :", error);
+          try {
+            data = JSON.parse(text);
+          } catch {
+            throw new Error(
+              "Le serveur a renvoyé une page HTML au lieu du JSON. " +
+              "Vérifie la route API et le déploiement Render."
+            );
+          }
 
-        messageBox.textContent = "❌ " + error.message;
+          if (!response.ok) {
+            throw new Error(data.erreur || data.error ||
+              "Erreur HTTP " + response.status);
+          }
 
-        detailsBox.textContent =
-          "Vérifie la connexion au serveur et réessaie.";
+          status.textContent = "✅ Demande reçue par le serveur.";
+          resultText.textContent = JSON.stringify(data, null, 2);
+          result.style.display = "block";
+        } catch (error) {
+          status.textContent = "🔴 Échec : " + error.message;
+          console.error(error);
+        } finally {
+          button.disabled = false;
+        }
+      });
 
-        statusBox.textContent =
-          "🔴 Échec de l'envoi de la demande.";
-      } finally {
-        button.disabled = false;
-        button.textContent = "🎶 Générer la musique";
-      }
-    });
-
-    verifierConnexion();
+    checkAPI();
   </script>
 </body>
 </html>
