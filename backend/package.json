@@ -1,7 +1,7 @@
 {
-  "name": "afro-musique-backend",
+  "name": "afro-musique-api",
   "version": "1.0.0",
-  "description": "Backend API Afro Musique",
+  "description": "API de l'application Afro Musique",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
@@ -9,5 +9,8 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.21.2"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
