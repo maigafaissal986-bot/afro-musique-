@@ -18,22 +18,16 @@ app.get("/sante", (req, res) => {
   });
 });
 
-app.post("/generatrice", async (req, res) => {
+app.post("/generatrice", (req, res) => {
   try {
     const { titre, artiste, style, description } = req.body;
 
     if (!titre || !description) {
       return res.status(400).json({
+        succes: false,
         erreur: "Le titre et la description sont obligatoires."
       });
     }
-
-    console.log("Nouvelle demande musicale :", {
-      titre,
-      artiste,
-      style,
-      description
-    });
 
     res.json({
       succes: true,
